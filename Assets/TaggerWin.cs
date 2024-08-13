@@ -40,12 +40,6 @@ public class TaggerWin : MonoBehaviour
 
     private void OnPlayAgainClicked()
     {
-        if (string.IsNullOrEmpty(previousRoomName))
-        {
-            Debug.LogWarning("Room name is not set.");
-            return;
-        }
-
         // Connect to Photon and join the room
         PhotonNetwork.ConnectUsingSettings(VersionName);
     }
@@ -60,10 +54,6 @@ public class TaggerWin : MonoBehaviour
         if (!string.IsNullOrEmpty(previousRoomName))
         {
             PhotonNetwork.JoinOrCreateRoom(previousRoomName, new RoomOptions() { MaxPlayers = 5 }, TypedLobby.Default);
-        }
-        else
-        {
-            Debug.LogWarning("Room name is not set.");
         }
     }
 
@@ -90,11 +80,5 @@ public class TaggerWin : MonoBehaviour
     private void OnJoinedRoom()
     {
         PhotonNetwork.LoadLevel("Waiting"); // Load the Waiting scene when joined a room
-    }
-
-    private void OnDisconnected(DisconnectCause cause)
-    {
-        Debug.Log("Disconnected from Photon: " + cause.ToString());
-        // Optionally handle reconnection or additional logic
     }
 }

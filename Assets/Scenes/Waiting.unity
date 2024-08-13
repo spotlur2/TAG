@@ -655,9 +655,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: The start button will appear when 5 players have joined the lobby. Once
-    this happens you will have 5 seconds to move around and get away from the other
-    players, one of them could end up being IT.
+  m_Text: The game will begin when 5 players have joined the lobby. Once this happens
+    you will have 5 seconds to move around and get away from the other players, one
+    of them could end up being IT.
 --- !u!222 &1809660488
 CanvasRenderer:
   m_ObjectHideFlags: 0

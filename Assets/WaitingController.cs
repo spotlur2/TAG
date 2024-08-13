@@ -14,7 +14,6 @@ public class WaitingController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(PhotonNetwork.countOfPlayers);
         
         if (PhotonNetwork.playerList.Length == 2)
         {

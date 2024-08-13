@@ -260,9 +260,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: The game will begin when 5 players have joined the lobby. Once this happens
-    you will have 5 seconds to move around. Try to get away from the other players,
-    one of them could end up being IT.
+  m_Text: You have 5 seconds to move around before the game starts. Try to get away
+    from the other players, one of them could end up being IT!
 --- !u!222 &583862535
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13197,7 +13196,6 @@ MonoBehaviour:
   SceneCamera: {fileID: 760941275}
   CountdownAndTimerText: {fileID: 1789286036}
   PingText: {fileID: 1952370754}
-  GameOverText: {fileID: 0}
 --- !u!4 &1260368128
 Transform:
   m_ObjectHideFlags: 0
@@ -13853,7 +13851,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2125360583
 MonoBehaviour:
   m_ObjectHideFlags: 0

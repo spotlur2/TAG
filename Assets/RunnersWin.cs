@@ -38,7 +38,6 @@ public class RunnersWin : MonoBehaviour
     {
         if (string.IsNullOrEmpty(previousRoomName))
         {
-            Debug.LogWarning("Room name is not set.");
             return;
         }
 
@@ -56,10 +55,6 @@ public class RunnersWin : MonoBehaviour
         if (!string.IsNullOrEmpty(previousRoomName))
         {
             PhotonNetwork.JoinOrCreateRoom(previousRoomName, new RoomOptions() {MaxPlayers = 5, IsOpen = true, IsVisible = true}, TypedLobby.Default);
-        }
-        else
-        {
-            Debug.LogWarning("Room name is not set.");
         }
     }
 
@@ -81,11 +76,5 @@ public class RunnersWin : MonoBehaviour
     private void OnJoinedRoom()
     {
         PhotonNetwork.LoadLevel("Waiting"); // Load the Waiting scene when joined a room
-    }
-
-    private void OnDisconnected(DisconnectCause cause)
-    {
-        Debug.Log("Disconnected from Photon: " + cause.ToString());
-        // Optionally handle reconnection or additional logic
     }
 }

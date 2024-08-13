@@ -15,7 +15,7 @@ public class GameManager : Photon.MonoBehaviour
     public Text PingText;
 
     private float countdownTime = 5f;
-    private float gameTime = 5f;
+    private float gameTime = 200f;
     private bool gameStarted = false;
     private bool gameEnded = false; // Track if the game has ended
 
@@ -28,7 +28,6 @@ public class GameManager : Photon.MonoBehaviour
     {
         if (GameCanvas == null || StartCanvas == null || SceneCamera == null || CountdownAndTimerText == null || PingText == null || photonView == null)
         {
-            Debug.LogError("One or more GameObjects or components are not assigned in the Inspector.");
             return;
         }
 
@@ -167,7 +166,6 @@ public class GameManager : Photon.MonoBehaviour
     private void EndGame()
     {
         gameEnded = true;
-        Debug.Log("Game Over.");
 
         // Find all player objects
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -195,13 +193,11 @@ public class GameManager : Photon.MonoBehaviour
                 TaggerWin.SetTaggerName(itPlayer.photonView.owner.NickName);
             }
 
-            Debug.Log("Player who is 'it' wins!");
             StartCoroutine(ShowGameOverAndLoadScene("TaggerWin"));
         }
         else
         {
             // Timer ran out or not all players are tagged
-            Debug.Log("Runners win!");
             StartCoroutine(ShowGameOverAndLoadScene("RunnersWin"));
         }
 
@@ -277,7 +273,6 @@ public class GameManager : Photon.MonoBehaviour
         if (itPlayer != null && taggedCount == players.Length - 1)
         {
             // All players except "it" are tagged
-            Debug.Log("Player who is 'it' wins!");
             if (!gameEnded)
             {
                 EndGame();
@@ -293,7 +288,6 @@ public class GameManager : Photon.MonoBehaviour
             Player player = playerObj.GetComponent<Player>();
             if (player.photonView.owner.ID == playerID)
             {
-                Debug.Log("RAN");
                 player.isIt = true;
                 player.PlayerNameText.color = Color.red; // Turn the name tag red
                 player.SetAsIt();
@@ -304,7 +298,6 @@ public class GameManager : Photon.MonoBehaviour
     [PunRPC]
     private void TagPlayer(int playerID)
     {
-        Debug.Log("Player with ID " + playerID + " has been tagged.");
 
         foreach (GameObject playerObj in GameObject.FindGameObjectsWithTag("Player"))
         {
@@ -312,7 +305,6 @@ public class GameManager : Photon.MonoBehaviour
             if (player.photonView.owner.ID == playerID)
             {
                 player.tagged = true;
-                Debug.Log("Tagging player with ID " + playerID);
                 player.Tag();
             }
         }

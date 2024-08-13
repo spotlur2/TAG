@@ -116,7 +116,6 @@ public class Player : Photon.MonoBehaviour
 
     public void Tag()
     {
-        Debug.Log("Player tagged: " + photonView.owner.NickName);
         tagged = true;
         StartSpectating();
     }
