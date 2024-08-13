@@ -15,7 +15,7 @@ public class WaitingController : MonoBehaviour
     private void Update()
     {
         
-        if (PhotonNetwork.playerList.Length == 2)
+        if (PhotonNetwork.playerList.Length == 5)
         {
             PhotonNetwork.LoadLevel("MainGame");
         }
@@ -23,7 +23,7 @@ public class WaitingController : MonoBehaviour
 
     /*void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
     {
-        if (PhotonNetwork.countOfPlayers == 2)
+        if (PhotonNetwork.countOfPlayers == 5)
         {
             PhotonNetwork.LoadLevel("MainGame");
         }
