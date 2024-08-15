@@ -15,7 +15,7 @@ public class WaitingController : MonoBehaviour
     private void Update()
     {
         
-        if (PhotonNetwork.playerList.Length == 5)
+        if (PhotonNetwork.playerList.Length == 3)
         {
             PhotonNetwork.LoadLevel("MainGame");
         }
