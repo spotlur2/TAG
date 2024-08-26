@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
-	[SerializeField] private string VersionName = "1";
+	[SerializeField] private string VersionName = "2";
 	[SerializeField] private GameObject UsernameMenu;
 	[SerializeField] private GameObject ConnectPanel;
-
 	[SerializeField] private InputField UsernameInput;
-	[SerializeField] private InputField CreateGameInput;
-	[SerializeField] private InputField JoinGameInput;
 
+	[SerializeField] private InputField JoinGameInput;
 	[SerializeField] private GameObject StartButton;
+	[SerializeField] private TMP_Dropdown GameModeDropdown;
 	public static string roomName;
+	public static string Username = "";
 
 	private void Awake()
 	{
@@ -23,7 +24,14 @@ public class MenuController : MonoBehaviour
 
 	private void Start()
 	{
-		UsernameMenu.SetActive(true);
+		if (string.IsNullOrEmpty(Username))
+		{
+			UsernameMenu.SetActive(true);
+		}
+		else
+		{
+			PhotonNetwork.playerName = Username;
+		}
 	}
 
 	private void OnConnectedToMaster()
@@ -50,20 +58,43 @@ public class MenuController : MonoBehaviour
 		PhotonNetwork.playerName = UsernameInput.text;
 	}
 
-	public void CreateGame()
-	{
-		roomName = CreateGameInput.text;
-		PhotonNetwork.CreateRoom(roomName, new RoomOptions() {MaxPlayers = 5, IsOpen = true, IsVisible = true}, TypedLobby.Default);
-		RunnersWin.SetPreviousRoomName(roomName);
-		TaggerWin.SetPreviousRoomName(roomName);
-	}
-
 	public void JoinGame()
 	{
 		roomName = JoinGameInput.text;
-		PhotonNetwork.JoinOrCreateRoom(roomName, new RoomOptions() {MaxPlayers = 5, IsOpen = true, IsVisible = true}, TypedLobby.Default);
-		RunnersWin.SetPreviousRoomName(roomName);
-		TaggerWin.SetPreviousRoomName(roomName);
+		int selectedGameMode = GameModeDropdown.value;
+
+		foreach (RoomInfo room in PhotonNetwork.GetRoomList())
+        {
+			Debug.Log(room);
+            if (room.Name == roomName)
+            {
+                // Room exists, join it
+                PhotonNetwork.JoinRoom(roomName);
+				RunnersWin.SetPreviousRoomName(roomName);
+				TaggerWin.SetPreviousRoomName(roomName);
+				RunnersWin.SetPreviousGameMode(selectedGameMode);
+				TaggerWin.SetPreviousGameMode(selectedGameMode);
+                return;
+            }
+        }
+
+		RoomOptions roomOptions = new RoomOptions()
+        {
+            MaxPlayers = 5,
+            IsOpen = true,
+            IsVisible = true
+        };
+
+        roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable()
+        {
+            { "GameMode", selectedGameMode }
+        };
+
+        PhotonNetwork.CreateRoom(roomName, roomOptions, TypedLobby.Default);
+        RunnersWin.SetPreviousRoomName(roomName);
+        TaggerWin.SetPreviousRoomName(roomName);
+		RunnersWin.SetPreviousGameMode(selectedGameMode);
+		TaggerWin.SetPreviousGameMode(selectedGameMode);
 	}
 
 	private void OnJoinedRoom()

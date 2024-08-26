@@ -94,6 +94,8 @@ public class GameManager : Photon.MonoBehaviour
 
         if (PhotonNetwork.isMasterClient)
         {
+            PhotonNetwork.room.IsOpen = false;
+
             List<int> playerIDs = GetAllPlayerIDs();
             int selectedPlayerID = SelectRandomPlayer(playerIDs);
             photonView.RPC("SetPlayerAsIt", PhotonTargets.All, selectedPlayerID);
@@ -245,7 +247,11 @@ public class GameManager : Photon.MonoBehaviour
 
     private int SelectRandomPlayer(List<int> playerIDs)
     {
-        int randomIndex = Random.Range(0, playerIDs.Count);
+        int randomIndex = Random.Range(-1, playerIDs.Count);
+        if (randomIndex < 0)
+        {
+            randomIndex = 0;
+        }
         return playerIDs[randomIndex];
     }
 
@@ -289,7 +295,7 @@ public class GameManager : Photon.MonoBehaviour
             if (player.photonView.owner.ID == playerID)
             {
                 player.isIt = true;
-                player.PlayerNameText.color = Color.red; // Turn the name tag red
+                //player.PlayerNameText.color = Color.red; // Turn the name tag red
                 player.SetAsIt();
             }
         }

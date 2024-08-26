@@ -8,11 +8,13 @@ public class TaggerWin : MonoBehaviour
 {
     [SerializeField] private Button playAgainButton;
     [SerializeField] private Button quitButton;
-    [SerializeField] private string VersionName = "1";
+    [SerializeField] private string VersionName = "2";
     public Text TitleText;
 
     private static string previousRoomName; // Store the previous room name
     private static string taggerName; // Store the name of the "it" player
+    private static string Username;
+    private static int previousGameMode;
 
     private void Start()
     {
@@ -28,6 +30,12 @@ public class TaggerWin : MonoBehaviour
 
         TitleText.text = taggerName + " Wins!";
 
+        Username = PhotonNetwork.playerName;
+
+        if (PhotonNetwork.isMasterClient)
+        {
+            PhotonNetwork.room.IsOpen = true;
+        }
         // Disconnect immediately when the scene loads
         StartCoroutine(DisconnectAndWait());
     }
@@ -46,20 +54,35 @@ public class TaggerWin : MonoBehaviour
 
     private void OnQuitClicked()
     {
+        MenuController.Username = Username;
         SceneManager.LoadScene("MainMenu");
     }
 
     private void TryJoinRoom()
     {
-        if (!string.IsNullOrEmpty(previousRoomName))
+		RoomOptions roomOptions = new RoomOptions()
         {
-            PhotonNetwork.JoinOrCreateRoom(previousRoomName, new RoomOptions() { MaxPlayers = 5 }, TypedLobby.Default);
-        }
+            MaxPlayers = 5,
+            IsOpen = true,
+            IsVisible = true
+        };
+
+        roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable()
+        {
+            { "GameMode", previousGameMode }
+        };
+
+        PhotonNetwork.JoinOrCreateRoom(previousRoomName, roomOptions, TypedLobby.Default);
     }
 
     public static void SetPreviousRoomName(string roomName)
     {
         previousRoomName = roomName;
+    }
+    
+    public static void SetPreviousGameMode(int gameMode)
+    {
+        previousGameMode = gameMode;
     }
 
     public static void SetTaggerName(string name)

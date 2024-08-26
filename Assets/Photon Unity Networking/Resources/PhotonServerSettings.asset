@@ -61,4 +61,7 @@ MonoBehaviour:
   - TagPlayer
   - ActivateSceneCameraRPC
   - EndGameRPC
+  - UpdateGameTime
+  - SetPlayerRoles
+  - UnfreezePlayer
   DisableAutoOpenWizard: 1

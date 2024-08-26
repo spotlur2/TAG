@@ -8,9 +8,11 @@ public class RunnersWin : MonoBehaviour
 {
     [SerializeField] private Button playAgainButton;
     [SerializeField] private Button quitButton;
-    [SerializeField] private string VersionName = "1";
+    [SerializeField] private string VersionName = "2";
 
     private static string previousRoomName; // Store the previous room name
+    private static string Username;
+    private static int previousGameMode;
 
     private void Start()
     {
@@ -22,6 +24,13 @@ public class RunnersWin : MonoBehaviour
         if (quitButton != null)
         {
             quitButton.onClick.AddListener(OnQuitClicked);
+        }
+
+        Username = PhotonNetwork.playerName;
+
+        if (PhotonNetwork.isMasterClient)
+        {
+            PhotonNetwork.room.IsOpen = true;
         }
 
         // Disconnect immediately when the scene loads
@@ -47,20 +56,35 @@ public class RunnersWin : MonoBehaviour
 
     private void OnQuitClicked()
     {
+        MenuController.Username = Username;
         SceneManager.LoadScene("MainMenu");
     }
 
     private void TryJoinRoom()
     {
-        if (!string.IsNullOrEmpty(previousRoomName))
+		RoomOptions roomOptions = new RoomOptions()
         {
-            PhotonNetwork.JoinOrCreateRoom(previousRoomName, new RoomOptions() {MaxPlayers = 5, IsOpen = true, IsVisible = true}, TypedLobby.Default);
-        }
+            MaxPlayers = 5,
+            IsOpen = true,
+            IsVisible = true
+        };
+
+        roomOptions.CustomRoomProperties = new ExitGames.Client.Photon.Hashtable()
+        {
+            { "GameMode", previousGameMode }
+        };
+
+        PhotonNetwork.JoinOrCreateRoom(previousRoomName, roomOptions, TypedLobby.Default);
     }
 
     public static void SetPreviousRoomName(string roomName)
     {
         previousRoomName = roomName;
+    }
+
+    public static void SetPreviousGameMode(int gameMode)
+    {
+        previousGameMode = gameMode;
     }
 
     private void OnConnectedToMaster()

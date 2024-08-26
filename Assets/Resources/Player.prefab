@@ -490,11 +490,13 @@ MonoBehaviour:
   groundlayer:
     serializedVersion: 2
     m_Bits: 64
+  SceneCamera: {fileID: 0}
   isGrounded: 0
   MoveSpeed: 30
   JumpForce: 37
   isIt: 0
   tagged: 0
+  gameMode: 0
 --- !u!114 &-8109843844470485025
 MonoBehaviour:
   m_ObjectHideFlags: 0
