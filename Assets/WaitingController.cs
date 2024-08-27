@@ -52,7 +52,6 @@ public class WaitingController : MonoBehaviour
 
     private string GetSceneNameForGameMode(int gameMode)
     {
-        // Define the scene names for different game modes
         switch (gameMode)
         {
             case 0:

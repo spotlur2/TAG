@@ -17,7 +17,7 @@ public class GameManager : Photon.MonoBehaviour
     private float countdownTime = 5f;
     private float gameTime = 200f;
     private bool gameStarted = false;
-    private bool gameEnded = false; // Track if the game has ended
+    private bool gameEnded = false; 
 
     private void Awake()
     {
@@ -41,7 +41,7 @@ public class GameManager : Photon.MonoBehaviour
 
     private IEnumerator WaitAndSpawnPlayer()
     {
-        yield return new WaitForSeconds(1f); // Adjust the delay time as needed
+        yield return new WaitForSeconds(1f); 
         SpawnPlayer(); // Spawn players after the delay
     }
 
@@ -73,7 +73,7 @@ public class GameManager : Photon.MonoBehaviour
         }
         else
         {
-            StartCanvas.SetActive(true); // Ensure StartCanvas is active for non-master clients as well
+            StartCanvas.SetActive(true);
         }
 
         SceneCamera.SetActive(false); // Disable the scene camera when the player spawns

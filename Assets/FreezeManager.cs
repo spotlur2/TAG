@@ -264,7 +264,7 @@ public class FreezeManager : Photon.MonoBehaviour
         {
             if (!gameEnded)
             {
-                EndGame(true); // Pass true to indicate that "it" player wins
+                EndGame(true);
             }
         }
         // If time runs out, runners win
@@ -272,7 +272,7 @@ public class FreezeManager : Photon.MonoBehaviour
         {
             if (!gameEnded)
             {
-                EndGame(false); // Pass false to indicate that runners win
+                EndGame(false);
             }
         }
 }
@@ -292,7 +292,7 @@ public class FreezeManager : Photon.MonoBehaviour
             else if (player.photonView.owner.ID == medicPlayerID)
             {
                 player.isMedic = true;
-                player.SetAsMedic(); // Ensure you have this method for the medic
+                player.SetAsMedic();
             }
         }
     }
