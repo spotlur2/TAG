@@ -13,6 +13,7 @@ public class InfectionManager : Photon.MonoBehaviour
     public GameObject SceneCamera;
     public Text CountdownAndTimerText;
     public Text PingText;
+    [SerializeField] private UIController uiController;
 
     private float countdownTime = 5f;
     private float gameTime = 200f;
@@ -60,10 +61,14 @@ public class InfectionManager : Photon.MonoBehaviour
     private void SpawnPlayer()
     {
         GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, Vector3.zero, Quaternion.identity, 0);
-        player.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.player);
+        player.GetComponent<PhotonView>().TransferOwnership(PhotonNetwork.player); // Ensure correct ownership
 
+        // Set the scene camera reference for the player
         Player playerScript = player.GetComponent<Player>();
         playerScript.SceneCamera = SceneCamera;
+
+        // Set the player reference in the UIController
+        uiController.SetPlayer(playerScript);
 
         if (PhotonNetwork.isMasterClient)
         {
@@ -74,7 +79,7 @@ public class InfectionManager : Photon.MonoBehaviour
             StartCanvas.SetActive(true);
         }
 
-        SceneCamera.SetActive(false);
+        SceneCamera.SetActive(false); // Disable the scene camera when the player spawns
     }
 
     private IEnumerator StartGameCountdown()

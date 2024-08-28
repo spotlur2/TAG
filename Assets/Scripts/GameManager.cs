@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class GameManager : Photon.MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GameManager : Photon.MonoBehaviour
     public GameObject SceneCamera;
     public Text CountdownAndTimerText;
     public Text PingText;
+    [SerializeField] private UIController uiController;
 
     private float countdownTime = 5f;
     private float gameTime = 200f;
@@ -66,6 +68,9 @@ public class GameManager : Photon.MonoBehaviour
         // Set the scene camera reference for the player
         Player playerScript = player.GetComponent<Player>();
         playerScript.SceneCamera = SceneCamera;
+
+        // Set the player reference in the UIController
+        uiController.SetPlayer(playerScript);
 
         if (PhotonNetwork.isMasterClient)
         {

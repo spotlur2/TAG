@@ -90,15 +90,25 @@ public class Player : Photon.MonoBehaviour
     }
 
     [PunRPC]
-    private void FlipTrue()
+    public void FlipTrue()
     {
         sr.flipX = true;
     }
 
     [PunRPC]
-    private void FlipFalse()
+    public void FlipFalse()
     {
         sr.flipX = false;
+    }
+
+    public void Move(Vector3 direction)
+    {
+        transform.position += direction * MoveSpeed * Time.deltaTime;
+    }
+
+    public void Jump()
+    {
+        rb.velocity = Vector2.up * JumpForce;
     }
 
     public void SetAsIt()
