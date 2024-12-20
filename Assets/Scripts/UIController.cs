@@ -1,12 +1,15 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class UIController : MonoBehaviour
 {
-    public Player player; // Reference to the Player script
+    private Player player;
 
     public void MoveLeft()
     {
-        if (player != null)
+        if (player != null && player.photonView.isMine)
         {
             player.FlipTrue();
             player.Move(Vector3.left);
@@ -15,7 +18,7 @@ public class UIController : MonoBehaviour
 
     public void MoveRight()
     {
-        if (player != null)
+        if (player != null && player.photonView.isMine)
         {
             player.FlipFalse();
             player.Move(Vector3.right);
@@ -24,7 +27,8 @@ public class UIController : MonoBehaviour
 
     public void Jump()
     {
-        if (player != null && player.isGrounded)
+        Debug.Log("PRESSED");
+        if (player != null && player.photonView.isMine && player.isGrounded)
         {
             player.Jump();
         }
@@ -32,6 +36,9 @@ public class UIController : MonoBehaviour
 
     public void SetPlayer(Player currentPlayer)
     {
-        player = currentPlayer;
+        if (currentPlayer.photonView.isMine)
+        {
+            player = currentPlayer;
+        }
     }
 }

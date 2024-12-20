@@ -25,7 +25,7 @@ public class WaitingController : MonoBehaviour
 
     private void Update()
     {
-        if (PhotonNetwork.playerList.Length == 3) // Check if all players are present
+        if (PhotonNetwork.playerList.Length == 2) // Check if all players are present
         {
             LoadScene();
         }

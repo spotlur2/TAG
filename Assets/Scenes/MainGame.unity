@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 361343225}
   - component: {fileID: 361343224}
   - component: {fileID: 361343223}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: RightButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +271,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 361343224}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 863229329}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: MoveRight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &361343224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,7 +514,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e6006ad835754449c5e55034846cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!4 &863229330
 Transform:
   m_ObjectHideFlags: 0
@@ -13644,7 +13655,7 @@ GameObject:
   - component: {fileID: 1646736891}
   - component: {fileID: 1646736890}
   - component: {fileID: 1646736889}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: JumpButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13713,7 +13724,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1646736890}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 863229329}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: Jump
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1646736890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13764,7 +13787,7 @@ GameObject:
   - component: {fileID: 1651945930}
   - component: {fileID: 1651945929}
   - component: {fileID: 1651945928}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: LeftButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13833,7 +13856,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1651945929}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 863229329}
+        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+        m_MethodName: MoveLeft
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1651945929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18310,8 +18345,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 760941278}
+  - {fileID: 1547623833}
   - {fileID: 2125360586}
   - {fileID: 1501837848}
   - {fileID: 1260368128}
-  - {fileID: 1547623833}
   - {fileID: 863229330}
